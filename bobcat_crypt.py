@@ -60,7 +60,7 @@ class BobcatCrypto:
         # Кодирование в base64 URL-safe (без padding)
         encoded = base64.urlsafe_b64encode(combined).decode('ascii').rstrip('=')
         
-        return f"bobcat://aes-256-ccm/{encoded}"
+        return f"bobcat-crypt://aes-256-ccm/{encoded}"
     
     @staticmethod
     def decrypt(link: str, password: str) -> str:
@@ -72,7 +72,7 @@ class BobcatCrypto:
             raise ValueError(f"Пароль должен быть минимум {MIN_PASSWORD_LEN} символов")
         
         # Проверка формата ссылки
-        if not link.startswith("bobcat://aes-256-ccm/"):
+        if not link.startswith("bobcat-crypt://aes-256-ccm/"):
             raise ValueError("Неверный формат ссылки. Ожидается: bobcat://aes-256-ccm/...")
         
         # Извлечение закодированных данных
